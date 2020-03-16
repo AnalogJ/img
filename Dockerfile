@@ -50,7 +50,7 @@ RUN chmod u+s /usr/bin/newuidmap /usr/bin/newgidmap \
 RUN passwd -l root || true
 
 FROM base AS debug
-RUN apk add --no-cache bash strace
+RUN apk add --no-cache bash strace python
 
 FROM base AS release
 USER user
