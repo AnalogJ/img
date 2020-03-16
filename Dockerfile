@@ -33,7 +33,7 @@ RUN ./autogen.sh --disable-nls --disable-man --without-audit --without-selinux -
 
 FROM alpine:3.8 AS base
 MAINTAINER Jessica Frazelle <jess@linux.com>
-RUN apk add --no-cache git
+RUN apk add --no-cache git python
 COPY --from=img /usr/bin/img /usr/bin/img
 COPY --from=idmap /usr/bin/newuidmap /usr/bin/newuidmap
 COPY --from=idmap /usr/bin/newgidmap /usr/bin/newgidmap
@@ -50,7 +50,7 @@ RUN chmod u+s /usr/bin/newuidmap /usr/bin/newgidmap \
 RUN passwd -l root || true
 
 FROM base AS debug
-RUN apk add --no-cache bash strace python
+RUN apk add --no-cache bash strace
 
 FROM base AS release
 USER user
